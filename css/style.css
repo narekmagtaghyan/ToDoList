@@ -111,3 +111,67 @@ input {
 #todo-form button {
     margin-left: 10px;
 }
+
+/* For mobile */
+@media (max-width: 768px) {
+    .main {
+        max-width: 95%;
+    }
+}
+
+@media (max-width: 576px) {
+    button {
+        padding: 0 8px;
+    }
+
+    #todo-form {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 5px;
+    }
+
+    #todo-form button {
+        margin-left: 5px;
+    }
+}
+
+@media (max-width: 420px) {
+    .header h1 {
+        margin: 10px;
+    }
+
+    #todo-form button {
+        margin-top: 5px;
+    }
+
+    #todo-form input {
+        max-width: 90%;
+    }
+
+    .todo-item {
+        display: block;
+        text-align: center;
+    }
+
+    .todo-item .checkbox {
+        margin: 0;
+    }
+
+    .todo-item .title {
+        display: inline-block;
+        margin-bottom: 8px;
+    }
+
+    .todo-item__settings {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 8px;
+    }
+
+    .todo-item .edit,
+    .todo-item .delete {
+        opacity: 1;
+        line-height: 17px;
+    }
+}
