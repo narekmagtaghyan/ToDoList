@@ -124,41 +124,22 @@ input {
         padding: 0 8px;
     }
 
-    #todo-form {
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 5px;
-    }
-
-    #todo-form button {
-        margin-left: 5px;
-    }
-}
-
-@media (max-width: 420px) {
     .header h1 {
         margin: 10px;
     }
 
-    #todo-form button {
-        margin-top: 5px;
-    }
-
-    #todo-form input {
-        max-width: 90%;
-    }
-
     .todo-item {
-        display: block;
+        flex-direction: column;
+    }
+
+    .todo-item__preview {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
         text-align: center;
-    }
-
-    .todo-item .checkbox {
-        margin: 0;
-    }
-
-    .todo-item .title {
-        display: inline-block;
+        row-gap: 3px;
+        column-gap: 5px;
         margin-bottom: 8px;
     }
 
@@ -169,9 +150,24 @@ input {
         row-gap: 8px;
     }
 
+    .todo-item .checkbox,
+    .todo-item .title {
+        margin: 0;
+    }
+
     .todo-item .edit,
     .todo-item .delete {
         opacity: 1;
         line-height: 17px;
+    }
+
+    #todo-form {
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    #todo-form button {
+        margin: 0;
+        margin-top: 5px;
     }
 }
