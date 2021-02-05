@@ -68,9 +68,11 @@ input {
 /* Todo item */
 .todo-item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     user-select: none;
     padding: 1em;
+    border-top: 1px solid rgba(0,0,0,.1);
 }
 
 .todo-item .checkbox {
