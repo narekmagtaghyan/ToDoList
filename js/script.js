@@ -61,8 +61,13 @@ function bindEvents(todoItem) {
 function addTodoItem(event) {
     event.preventDefault();
 
-    if (addInput.value) {
+    if (addInput.value.trim() !== "" && addInput.value.length <= 24) {
         const listItem = createTodoItem(addInput.value);
+        todoList.appendChild(listItem);
+
+        todoForm.reset();
+    } else if (addInput.value.trim() !== "" && addInput.value.length >= 24) {
+        const listItem = createTodoItem(`${addInput.value.substring(0, 24)}...`);
         todoList.appendChild(listItem);
 
         todoForm.reset();
@@ -72,23 +77,42 @@ function addTodoItem(event) {
 }
 
 function toggleTodoItem({ target }) {
-    const listItem = target.closest(".todo-item");
+    const listItem = target.closest(".todo-item"),
+        editButton = listItem.querySelector(".edit"),
+        deleteBtn = listItem.querySelector(".delete");
 
     listItem.classList.toggle("completed");
+
+    if (listItem.classList.contains('completed')) {
+        editButton.setAttribute("disabled", "off");
+        deleteBtn.setAttribute("disabled", "off");
+    } else {
+        editButton.removeAttribute("disabled");
+        deleteBtn.removeAttribute("disabled");
+    }
 }
 
 function editTodoItem({ target }) {
     const listItem = target.closest(".todo-item"),
+        checkbox = listItem.querySelector(".checkbox"),
         title = listItem.querySelector(".title"),
         editInput = listItem.querySelector(".textfield"),
         isEditing = listItem.classList.contains("editing");
 
     if (isEditing) {
-        title.innerText = editInput.value;
+        if (editInput.value.trim() !== "" && editInput.value.length <= 24) {
+            title.innerText = editInput.value;
+        } else if (editInput.value.trim() !== "" && editInput.value.length >= 24) {
+            title.innerText = `${editInput.value.substring(0, 24)}...`;
+        }
+
         target.innerText = "Изменить";
+        checkbox.style.display = "block";
     } else {
         editInput.value = title.innerText;
         target.innerText = "Сохранить";
+
+        checkbox.style.display = "none";
     }
 
     listItem.classList.toggle("editing");
