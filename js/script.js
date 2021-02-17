@@ -3,45 +3,33 @@ const todoList = document.querySelector("#todo-list"),
     addInput = document.querySelector("#add-input"),
     todoItems = document.querySelectorAll(".todo-item");
 
+function createElement(tag, props, ...children) {
+    const element = document.createElement(tag);
+
+    Object.keys(props).forEach(key => element[key] = props[key]);
+
+    if (children.length > 0) {
+        children.forEach(child => {
+            if (typeof child === "string") {
+                child = document.createTextNode(child);
+            }
+
+            element.appendChild(child);
+        });
+    }
+
+    return element;
+}
+
 function createTodoItem(title) {
-    const todoPreview = document.createElement("div");
-    todoPreview.className = "todo-item__preview";
-
-    const checkbox = document.createElement("input");
-    checkbox.className = "checkbox";
-    checkbox.type = "checkbox";
-
-    const label = document.createElement("label");
-    label.textContent = title;
-    label.className = "title";
-
-    const editInput = document.createElement("input");
-    editInput.type = "text";
-    editInput.className = "textfield";
-
-    const todoSettings = document.createElement("div");
-    todoSettings.className = "todo-item__settings";
-
-    const editButton = document.createElement("button");
-    editButton.innerText = "Изменить";
-    editButton.className = "edit";
-
-    const deleteButton = document.createElement("button");
-    deleteButton.className = "delete";
-    deleteButton.innerText = "Удалить";
-
-    const listItem = document.createElement("li");
-    listItem.className = "todo-item";
-
-    todoPreview.appendChild(checkbox);
-    todoPreview.appendChild(label);
-    todoPreview.appendChild(editInput);
-
-    todoSettings.appendChild(editButton);
-    todoSettings.appendChild(deleteButton);
-
-    listItem.appendChild(todoPreview);
-    listItem.appendChild(todoSettings);
+    const checkbox = createElement("input", { type: "checkbox", className: "checkbox" }),
+        label = createElement("label", { className: "title" }, title),
+        editInput = createElement("input", { type: "text", className: "textfield" }),
+        todoPreview = createElement("div", { className: "todo-item__preview" }, checkbox, label, editInput),
+        editButton = createElement("button", { className: "edit" }, "Изменить"),
+        deleteButton = createElement("button", { className: "delete" }, "Удалить"),
+        todoSettings = createElement("div", { className: "todo-item__settings" }, editButton, deleteButton),
+        listItem = createElement("li", { className: "todo-item" }, todoPreview, todoSettings);
 
     bindEvents(listItem);
 
