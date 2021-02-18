@@ -146,6 +146,7 @@ input {
 @media (max-width: 768px) {
     .main {
         max-width: 95%;
+        word-break: break-word;
     }
 }
 
@@ -156,7 +157,6 @@ input {
 
     .header h1 {
         margin: 10px;
-        word-break: break-word;
     }
 
     .todo-item {
@@ -184,7 +184,6 @@ input {
     .todo-item .checkbox,
     .todo-item .title {
         margin: 0;
-        word-break: break-word;
     }
 
     .todo-item .edit,
